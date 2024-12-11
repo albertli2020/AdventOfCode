@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Day1 {
 	public static void main(String[] args) {
-		File myFile = new File("puzzles/day1.csv");
+		File myFile = new File("AdventOfCode/src/puzzles/day1.csv");
 		ArrayList<Integer> arr1 = new ArrayList<Integer>();
 		ArrayList<Integer> arr2 = new ArrayList<Integer>();
 		try {
@@ -39,14 +39,10 @@ public class Day1 {
 			}
 			similarity += count *= num1;
 		}
+
 		System.out.println("Total distance is " + distance);
 		System.out.println("Similarity is " + similarity);
-
-
 	}
-
-
-
 }
 
 
