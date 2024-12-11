@@ -3,6 +3,7 @@ import os
 
 def search_horizontal(puzzle):
     for idx in enumerate(puzzle):
+        print(idx)
         
 
 puzzle_loc = "puzzles/"
