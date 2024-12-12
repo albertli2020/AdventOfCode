@@ -1,7 +1,7 @@
 import csv
 import os
 
-puzzle_loc = "puzzles/"
+puzzle_loc = "python_files/puzzles/"
 list1 = []
 list2 = []
 with open(os.path.join(puzzle_loc, "day1.csv"), newline='') as csvfile:

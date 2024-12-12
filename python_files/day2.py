@@ -13,7 +13,7 @@ def is_damped_safe(report):
             return True
     return False
 
-puzzle_loc = "puzzles/"
+puzzle_loc = "python_files/puzzles/"
 reports = []
 
 with open(os.path.join(puzzle_loc, "day2.csv"), newline='') as csvfile:
