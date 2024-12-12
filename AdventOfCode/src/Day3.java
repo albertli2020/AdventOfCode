@@ -24,13 +24,13 @@ public class Day3 {
 
         String mulPattern = "mul\\((\\d+),(\\d+)\\)";
 
-        Pattern pattern = Pattern.compile(mulPattern);
-        Matcher matcher = pattern.matcher(puzzle);
+        Pattern pattern = Pattern.compile(mulPattern); //create the pattern finder
+        Matcher matcher = pattern.matcher(puzzle); //all matches to the pattern in the puzzle
         
         int sum = 0;
-        while (matcher.find()) {
-            int num1 = Integer.parseInt(matcher.group(1));
-            int num2 = Integer.parseInt(matcher.group(2));
+        while (matcher.find()) { //iterate through all matches
+            int num1 = Integer.parseInt(matcher.group(1)); //group 1 is the first int in the pattern
+            int num2 = Integer.parseInt(matcher.group(2)); //group 2 is the second int in the pattern
             sum += num1 * num2;
         }
 
@@ -39,42 +39,28 @@ public class Day3 {
         int i = 0;
 
         while (i < puzzle.length()) {
-            if (puzzle.startsWith("do()", i)) {
+            if (puzzle.substring(i).startsWith("do()")) { //if there's a do, turn on and iterate by length of do
                 currentState = true;
-                i += 4;
-            } 
-            else if (puzzle.startsWith("don't()", i)) {
+                i += "do()".length();
+            } else if (puzzle.substring(i).startsWith("don't()")) { //if there's a don't, turn off and iterate by length of don't
                 currentState = false;
-                i += 7;
-            } 
-            else {
-                Matcher mulMatcher = pattern.matcher(puzzle.substring(i));
-                if (mulMatcher.find()) {
+                i += "don't()".length();
+            } else {
+                Matcher mulMatcher = pattern.matcher(puzzle.substring(i)); //create matcher for everything past the current point in the string
+                if (mulMatcher.find() && mulMatcher.start() == 0) { //take first pattern found in substring
                     if (currentState) {
-                        int num1 = Integer.parseInt(mulMatcher.group(1));
-                        int num2 = Integer.parseInt(mulMatcher.group(2));
+                        int num1 = Integer.parseInt(mulMatcher.group(1)); //group1 is first int in pattern
+                        int num2 = Integer.parseInt(mulMatcher.group(2)); //group2 is second int in pattern
                         conditionalSum += num1 * num2;
                     }
-                    i += mulMatcher.end();
+                    i += mulMatcher.end(); //iterate by length of pattern
+                } else {
+                    i++; //if no pattern, iterate by 1
                 }
-                else i++;
             }
         }
 
         System.out.println("Sum of multiplications (Part 1): " + sum);
         System.out.println("Sum of multiplications (Part 2): " + conditionalSum);
     }
-
-    public static ArrayList<String> extractNumbers(String input) {
-        ArrayList<String> numbers = new ArrayList<>();
-        Pattern pattern = Pattern.compile("\\d+");
-        Matcher matcher = pattern.matcher(input);
-        
-        while (matcher.find()) {
-            numbers.add(matcher.group());
-        }
-        
-        return numbers;
-    }
-
 }
